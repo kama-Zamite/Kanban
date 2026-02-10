@@ -67,7 +67,7 @@ const Navbar = () => {
 					color="#fb923c"
 					width={"16px"}
 					height={"16px"}
-					className="cursor-pointer"
+					style={{ cursor: 'pointer' }}
 					onClick={handleProfileClick}
 				/>
 				{dropdownOpen && (
