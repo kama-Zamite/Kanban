@@ -19,13 +19,11 @@ const MeuPerfil: React.FC = () => {
   const handleEdit = () => setEditMode(true);
   const handleCancel = () => {
     setEditMode(false);
-    setAvatarFile(null);
   };
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     // Aqui você pode integrar com backend para salvar
     setEditMode(false);
-    setAvatarFile(null);
   };
 
   const handleAvatarClick = () => {
@@ -34,7 +32,6 @@ const MeuPerfil: React.FC = () => {
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setAvatarFile(file);
       const reader = new FileReader();
       reader.onload = (ev) => {
         setUser((prev) => ({ ...prev, avatar: ev.target?.result as string }));
