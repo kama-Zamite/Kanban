@@ -1,20 +1,20 @@
 import {
-	AppsOutline,
-	GridOutline,
-	HomeOutline,
-	LogOutOutline,
-	NewspaperOutline,
-	NotificationsOutline,
-	PeopleOutline,
-	PieChartOutline,
+  AppsOutline,
+  GridOutline,
+  HomeOutline,
+  LogOutOutline,
+  PeopleOutline,
+  PieChartOutline,
+  // NewspaperOutline, // removido, não usado
+  // NotificationsOutline, // removido, não usado
 } from "react-ionicons";
-
 
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const navLinks = [
     {
       title: "Home",
@@ -41,24 +41,18 @@ const Sidebar = () => {
       icon: <PeopleOutline color="#555" width="22px" height="22px" />,
       path: "/workflows",
     },
-    // {
-    //   title: "Notifications",
-    //   icon: <NotificationsOutline color="#555" width="22px" height="22px" />,
-    //   path: "#",
-    // },
-    // {
-    //   title: "Newsletter",
-    //   icon: <NewspaperOutline color="#555" width="22px" height="22px" />,
-    //   path: "#",
-    // },
   ];
+
   return (
     <div className="fixed left-0 top-0 md:w-[230px] w-[60px] overflow-hidden h-full flex flex-col">
-      <div className="w-full flex items-center md:justify-start justify-center md:pl-5 h-[70px] bg-[#fff]">
+      {/* Logo */}
+      <div className="w-full flex items-center md:justify-start justify-center md:pl-5 h-[70px] bg-white">
         <span className="text-orange-400 font-semibold text-2xl md:block hidden">Logo.</span>
         <span className="text-orange-400 font-semibold text-2xl md:hidden block">L.</span>
       </div>
-      <div className="w-full h-[calc(100vh-70px)] border-r flex flex-col md:items-start items-center gap-2 border-slate-300 bg-[#fff] py-5 md:px-3 px-3 relative">
+
+      {/* Links de navegação */}
+      <div className="w-full h-[calc(100vh-70px)] border-r flex flex-col md:items-start items-center gap-2 border-slate-300 bg-white py-5 md:px-3 px-3 relative">
         {navLinks.map((link) => {
           const isActive = link.path !== "#" && location.pathname === link.path;
           return (
@@ -74,6 +68,8 @@ const Sidebar = () => {
             </div>
           );
         })}
+
+        {/* Log Out */}
         <div
           className="flex absolute bottom-4 items-center md:justify-start justify-center gap-2 md:w-[90%] w-[70%] rounded-lg hover:bg-orange-300 px-2 py-3 cursor-pointer bg-gray-200"
           onClick={() => {
@@ -81,7 +77,7 @@ const Sidebar = () => {
             navigate("/login");
           }}
         >
-          <LogOutOutline />
+          <LogOutOutline color="#555" width="22px" height="22px" />
           <span className="font-medium text-[15px] md:block hidden">Log Out</span>
         </div>
       </div>

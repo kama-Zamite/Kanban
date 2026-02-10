@@ -50,7 +50,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="md:w-[calc(100%-230px)] w-[calc(100%-60px)] fixed flex items-center justify-between pl-2 pr-6 h-[70px] top-0 md:left-[230px] left-[60px] border-b border-slate-300 bg-[#fff]">
+    <div className="md:w-[calc(100%-230px)] w-[calc(100%-60px)] fixed flex items-center justify-between pl-2 pr-6 h-[70px] top-0 md:left-[230px] left-[60px] border-b border-slate-300 bg-white">
       <div className="flex items-center gap-3 relative">
         <div className="cursor-pointer" onClick={handleProfileClick}>
           <PersonCircle color="#fb923c" width="28px" height="28px" />
@@ -63,13 +63,9 @@ const Navbar = () => {
           style={{ width: "120px" }}
         />
 
-        <ChevronDown
-          color="#fb923c"
-          width="16px"
-          height="16px"
-          style={{ cursor: "pointer" }}
-          onClick={handleProfileClick}
-        />
+        <div className="cursor-pointer" onClick={handleProfileClick}>
+          <ChevronDown color="#fb923c" width="16px" height="16px" />
+        </div>
 
         {dropdownOpen && (
           <div className="absolute top-10 left-0 bg-white border rounded shadow-md p-2 z-10">
