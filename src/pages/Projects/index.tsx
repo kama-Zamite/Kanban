@@ -14,6 +14,7 @@ const emptyProject: Omit<Project, "id"> = {
   members: 1,
   start: "",
   end: "",
+  workflowIds: [],
 };
 
 

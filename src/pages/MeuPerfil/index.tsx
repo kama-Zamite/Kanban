@@ -9,7 +9,6 @@ const MeuPerfil: React.FC = () => {
     avatar: "https://ui-avatars.com/api/?name=Usuario+Exemplo&background=fb923c&color=fff&size=128"
   });
   const [editMode, setEditMode] = useState(false);
-  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -4,9 +4,7 @@ import {
   HomeOutline,
   LogOutOutline,
   PeopleOutline,
-  PieChartOutline,
-  // NewspaperOutline, // removido, não usado
-  // NotificationsOutline, // removido, não usado
+  PieChartOutline
 } from "react-ionicons";
 
 import { useNavigate, useLocation } from "react-router-dom";
