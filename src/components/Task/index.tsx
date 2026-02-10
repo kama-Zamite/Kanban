@@ -5,24 +5,28 @@ import { TaskT } from "../../types";
 interface TaskProps {
 	task: TaskT;
 	provided: any;
+	onClick?: () => void;
 }
 
-const Task = ({ task, provided }: TaskProps) => {
-	const { title, description, priority, deadline, image, alt, tags } = task;
+const Task = ({ task, provided, onClick }: TaskProps) => {
+	const { title, description, priority, deadline, dueDate, image, alt, tags } = task;
 
 	return (
 		<div
 			ref={provided.innerRef}
 			{...provided.draggableProps}
 			{...provided.dragHandleProps}
+			onClick={onClick}
 			className="w-full cursor-grab bg-[#fff] flex flex-col justify-between gap-3 items-start shadow-sm rounded-xl px-3 py-4"
 		>
 			{image && alt && (
-				<img
-					src={image}
-					alt={alt}
-					className="w-full h-[170px] rounded-lg"
-				/>
+					<img
+						src={image}
+						alt={alt}
+						loading="lazy"
+						decoding="async"
+						className="w-full h-[120px] sm:h-[140px] md:h-[170px] rounded-lg object-cover"
+					/>
 			)}
 			<div className="flex items-center gap-2">
 				{tags.map((tag) => (
@@ -47,7 +51,12 @@ const Task = ({ task, provided }: TaskProps) => {
 						width="19px"
 						height="19px"
 					/>
-					<span className="text-[13px] text-gray-700">{deadline} mins</span>
+					<div className="flex flex-col">
+						<span className="text-[13px] text-gray-700">{deadline} mins</span>
+						{dueDate && (
+							<span className="text-[12px] text-gray-500">Due: {new Date(dueDate).toLocaleDateString()}</span>
+						)}
+					</div>
 				</div>
 				<div
 					className={`w-[60px] rounded-full h-[5px] ${

@@ -13,16 +13,20 @@ interface AddModalProps {
 	isOpen: boolean;
 	onClose: () => void;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	handleAddTask: (taskData: any) => void;
+	handleAddTask: (taskData: any, columnIdOverride?: string) => void;
+	columns: any;
 }
 
-const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) => {
+const AddModal = ({ isOpen, onClose, setOpen, handleAddTask, columns }: AddModalProps) => {
+		const columnKeys = columns ? Object.keys(columns) : [];
+		const [columnId, setColumnId] = useState(columnKeys[0] || "");
 	const initialTaskData = {
 		id: uuidv4(),
 		title: "",
 		description: "",
 		priority: "",
 		deadline: 0,
+		dueDate: "",
 		image: "",
 		alt: "",
 		tags: [] as Tag[],
@@ -66,7 +70,7 @@ const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) =>
 	};
 
 	const handleSubmit = () => {
-		handleAddTask(taskData);
+		handleAddTask(taskData, columnId);
 		closeModal();
 	};
 
@@ -80,7 +84,16 @@ const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) =>
 				className="w-full h-full bg-black opacity-70 absolute left-0 top-0 z-20"
 				onClick={closeModal}
 			></div>
-			<div className="md:w-[30vw] w-[90%] bg-white rounded-lg shadow-md z-50 flex flex-col items-center gap-3 px-5 py-6">
+			<div className="w-[90%] md:w-[60%] lg:w-[30vw] max-w-[800px] max-h-[90vh] overflow-auto bg-white rounded-lg shadow-md z-50 flex flex-col items-center gap-3 px-5 py-6">
+				<select
+					value={columnId}
+					onChange={e => setColumnId(e.target.value)}
+					className="w-full h-12 px-2 outline-none rounded-md bg-slate-100 border border-slate-300 text-sm"
+				>
+					{columnKeys.map(key => (
+						<option key={key} value={key}>{columns[key].name}</option>
+					))}
+				</select>
 				<input
 					type="text"
 					name="title"
@@ -114,6 +127,14 @@ const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) =>
 					value={taskData.deadline}
 					onChange={handleChange}
 					placeholder="Deadline"
+					className="w-full h-12 px-3 outline-none rounded-md bg-slate-100 border border-slate-300 text-sm"
+				/>
+				<input
+					type="date"
+					name="dueDate"
+					value={taskData.dueDate}
+					onChange={handleChange}
+					placeholder="Due date"
 					className="w-full h-12 px-3 outline-none rounded-md bg-slate-100 border border-slate-300 text-sm"
 				/>
 				<input
